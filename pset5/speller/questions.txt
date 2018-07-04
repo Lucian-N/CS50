@@ -1,0 +1,40 @@
+0.  It is an artificial long word said to mean "lung disease caused by inhaling very fine silica ash"
+
+1.  getrusage returns resource usage for the calling process (self, children or thread)
+
+2.  In struct rusage there are 16 members, though not all are used
+
+3.  before and after are passed by reference because passing by value would create copies of these structs
+    in memory and therefore could potentially lead to stack overflow
+
+4.  The for loop in the main() function is initialized with int c = fgetc(fp); which then
+    sets the value of c equal to the first character returned by fgetc(fp), fgetc will
+    return the next character(starting from the first) from the file stream it is pointed to ( in this case the file opened
+    is the text file that we had passed to the CL) c is then checked gainst the EOF character
+    (which is the termination condition, meaning we have reached the end of the file and that
+    there are no more words to check) c is once again set to equal to fgetc(fp) thus the loop will
+    cycle through all the words contained in the text file until the EOF character is found.
+    The function will the perform logic operations using if statements to check if the characters
+    returned are indeed alphanumeric ( using isalpha(c) ) or if an apostrophe is found ( \'
+    is used so that apostrophe's are not skipped over, and also an additional condition
+    is that an apostrophe cannot be the first element via ( index >0). If the condition is true
+    that character is passed to an array that will continuously increment until either the EOF character
+    is reached or the length of the word is bigger than the constant defined at the start of the program.
+    If the EOF is reached, the index is set to 0 so that a new word can be checked. Another if statement
+    checks for words with numbers via the (isdigit(c)) function and if true will set the index to 0 again,
+    signaling the start of a new word. If the word does not contain a number and if the index is greater than
+    0 then a new word has been found and the word counter is updated, the \0 array is written to our word
+    array to signify that the end of the string has been reached. At this point the spelling of the word
+    along with the resource usage / runtime is checked, printing the mispelled word if it is mispelled
+    and setting the index to 0 at the end to prepare for a new word.
+
+5.  Using fgetc presents 2 advantages, one it can check each character and can ignore bad input
+    character by character whereas using fscanf will lose the entire word if it reaches bad input
+    and second it could cause problems when spellchecking because when comparing strings one needs
+    to remember that a string is a pointer to the first char of that string.
+    Another difference is that fgetc reads the whole line (including space) and fscanf reads
+    until it encounters blankspace and ignores it therefore how the file we are reading from is formatted
+    can be considered an important factor.
+
+6.  They are passed as constants so that neither the pointer nor what is being stored into the pointer
+    can be modified at any point. It might also help pinpoint errors at compile time

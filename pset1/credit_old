@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+int main(void)
+{ long long c, m, n, count = 0, count2 = 0;
+long int numberArray[16], numberArray2[16];
+short int i,j, sume =0, sumo=0, checkc=0;
+  printf("Please input your card number for validation: ");
+  c = get_long_long();
+  while (c <= 0 ) 
+       { c = get_long_long();
+       printf("Please input your card number for validation: "); }
+  n = c; 
+  while (n >= 1 && n < 10000000000000000){
+        n /= 10;
+        count++;}
+if(count!=0){
+        count = 0;
+        n = c;
+        m = c;
+        while (n >= 1 && n < 10000000000000000){
+            numberArray[count] = n % 10;
+            n /= 10;
+            count++;}
+        if(count!=0){
+            for (i = count-2; i >= 0; i=i-2){
+                sume += numberArray[i];
+                while (m >= 1 && m < 10000000000000000){
+                    numberArray2[count2] = ((2*(m % 10))/10) + ((2*(m % 10))%10);
+                    m /= 10;
+                    count2++;}
+            for (j = count-1; j >= 0; j=j-2){
+                sumo += numberArray2[j];}
+            checkc= (sume + sumo) % 10;
+            if ( checkc != 0){
+            printf("INVALID!\n");}
+            else if ( numberArray[count] == '4') { printf("VISA!\n");}
+             else if ( numberArray[count] == '3' && (numberArray[count] == '4' || numberArray[count] == '7') ) { printf("AMEX!\n");}
+             else if ( numberArray[count] == '5' && (numberArray[count] == '1' || numberArray[count] == '2')) { printf("MASTERCARD!\n");}
+             else if ( numberArray[count] == '5' && (numberArray[count] == '3' || numberArray[count] == '4')) { printf("MASTERCARD!\n");}
+             else if ( numberArray[count] == '5' && numberArray[count] == '5') { printf("MASTERCARD!\n");}
+             return 0;
+}}}}

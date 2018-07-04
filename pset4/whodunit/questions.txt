@@ -1,0 +1,24 @@
+1.  <stdint.h> is a header file used to declare integer types of specified widths along with macros while also specifying the limits of integer types defined in other header files.
+
+2. The point of using uint8_t, uint32_t, int32_t and uint16_t in a program is to have integers of specified widths capable of storing an adress of a certain size or
+a number of bits (2^N) in a certain arrangement. In this specific case they are used to specify how many bits a pixel has ( 8, 16, 32 .. )/ color depth.
+
+3.  BYTE = 1 byte,  DWORD = 4 bytes, LONG = 4 bytes,  WORD = 2 bytes
+
+4.  The first two bytes of any BMP are the chars "B" ( 0x42) and "M" (0x4D) and they are used to specify the file type
+
+5.  bfSize = size in bytes of the bmp file(DWORD = 4 bytes), biSize = number of bytes required by the structure (DWORD = 4 bytes)
+
+6.  if biHeight is negative then the bitmap is generated top down with it's origin in the upper left corner
+
+7. bi.biBitCount == 24 specifies the number of bits per pixel in this case 24 ( 3 bytes)
+
+8.  The might return null if the pointers are assigned to a null value, more specifically if the command line arguments passed down to it are not locations to files
+
+9.  size_t fread(void * ptr, size_t size, size_t nmemb, FILE * stream); size_t nmemb is always 1 in our code because we will be copying the image or reading the image bit by bit (hence 1)
+
+10. Padding gets the value 3 assigned
+
+11. fseek sets the file position indicator for the stream to the value set, the new position is measured in bytes (e.g. go to the Nth byte)
+
+12. SEEK_CUR when used together with fseek specifies that the offset for the file position indicator is relative to the current position

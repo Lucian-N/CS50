@@ -1,0 +1,4 @@
+0. The framework allows for dimensions ranging from 3x3 to 9x9.
+1. The gameboard is represented using integers.
+2. The function that does the player greeting is greet();
+3. The functions that need to be implemented are init(); draw(); move(); && won();

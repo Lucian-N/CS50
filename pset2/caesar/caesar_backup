@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <string.h>
+#include <ctype.h>
+
+
+int main(int argc, string argv[])
+{   
+if (argc != 2) { return 1;}
+int k = atoi(argv[1]), astoalu = 65, astoall = 97;
+printf ("%d ",k);
+string ciphert = get_string();
+
+for (int i = 0, n = strlen(ciphert); i < n; i++)
+{
+    if (isalpha(ciphert[i])) 
+        {
+        if (isupper(ciphert[i])) 
+        {
+//            printf("%c", ciphert[i]);
+            int tu = ciphert[i] - astoalu;
+//            printf("%i\n", t);
+            int cu = ( tu + k) % 26;
+//            printf("%i\n", cu);
+            int tru = cu + astoalu;
+            printf("%c", tru);}
+        if (islower(ciphert[i])) 
+        {
+//            printf("%c", ciphert[i]);
+            int tl = ciphert[i] - astoall;
+//            printf("%i\n", t);
+            int cu = ( tl + k) % 26;
+//            printf("%i\n", cu);
+            int trl = cu + astoall;
+            printf("%c", trl);}
+        }
+}
+    printf("\n");
+    return 0;
+}
