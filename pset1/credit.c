@@ -2,6 +2,8 @@
 #include <cs50.h>
 #include <math.h>
 
+
+
 int main(void){
     long long int c,n,m, count = 0, count2 = 0 ;
     long long int numberArray[16], numberArray2[16];
@@ -49,8 +51,6 @@ int main(void){
             else for (j = count - 2; j >= 0; j = j - 2) {
                 sumo += numberArray2[j];
             }
-            // printf("sume %hd\n", sume);
-            //    printf("sumo %hd\n", sumo);
 
             checkc= (sume + sumo) % 10;
             if ( checkc != 0) {
