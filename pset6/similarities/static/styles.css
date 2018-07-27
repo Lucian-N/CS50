@@ -36,7 +36,7 @@ div.row
 /* remove padding within column */
 div.col
 {
-    padding: 0;
+    padding: 5;
 }
 
 /* add padding around form */
@@ -44,12 +44,26 @@ form
 {
     padding: 15px;
 }
+/* spacing in table */
+table
+{
+    border-spacing: 100px;
+    border: 1 solid black;
+    width: 100%;
+    height: 50%;
+}
+
+th
+{
+    background-color: #BBDEFB;
+}
 
 /* right-align leftmost column in matrix */
 div.row:first-of-type td:first-child,
 div.row:first-of-type th:first-child
 {
-    text-align: right;
+    text-align: left;
+    width:50px;
 }
 
 /* don't wrap rows in log */

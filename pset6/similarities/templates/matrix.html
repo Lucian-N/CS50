@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div>
+    <table >
+        <thead>
+            <tr>
+                <th>   </th>
+                <th>   </th>
+                <th>   </th>
+                {% for character in s2 %}
+                    <th>{{character}}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>   </td>
+                <td>   </td>
+                {% for i in range((s2)|length + 1) %}
+                    <td>{{i}}</td>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>   </td>
+                <td> 0 </td>
+                {% for i in matrix[0] %}
+                    <td>{{i[0]}}</td>
+                {% endfor %}
+            </tr>
+            {% for t in range(s1|length) %}
+                <tr>
+                    <th>{{s1[t]}}</th>
+                    <td>{{ t + 1}}</td>
+                    {% for i in matrix[t+1] %}
+                        <td>{{i[0]}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
