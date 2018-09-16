@@ -1,4 +1,5 @@
 import os
+import sqlite3
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -34,6 +35,7 @@ Session(app)
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
+
 
 
 @app.route("/")
@@ -116,18 +118,33 @@ def quote():
 def register():
     """Register user"""
     if request.method == "POST":
+        # Sanity check for empty fields
+        rows = db.execute("SELECT * FROM users WHERE username = :username",
+                          username=request.form.get("username"))
+
         if not request.form.get("username"):
             return apology("must provide username", 403)
         elif not request.form.get("password"):
             return apology("must provide password", 403)
         elif request.form.get("password") != request.form.get("password_check"):
             return apology ("passwords do not match", 403)
+
+        # Sanity check for existing user
+        elif len(rows) != 0:
+            return apology ("User already exists", 403)
+
+        # Add user, pass to db
         else:
-            rows = db.execute("")
+            rows = db.execute("INSERT INTO users (username, hash) \
+                            VALUES(:username, :password)", \
+                            username=request.form.get("username"), \
+                            password=generate_password_hash(request.form.get("password")))
+            session["user_id"] = rows
+            return redirect("/")
+
     else:
         return render_template("register.html")
 
-    return apology("TODO")
 
 
 @app.route("/sell", methods=["GET", "POST"])
