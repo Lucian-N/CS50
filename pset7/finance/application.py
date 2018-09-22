@@ -48,8 +48,15 @@ def index():
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
-    """Buy shares of stock"""
-    return apology("TODO")
+    if request.method =="POST":
+        quote_search = lookup(request.form.get("quote"))
+        quote_name = quote_search.get("name")
+        quote_symbol = quote_search.get("symbol")
+        quote_price = quote_search.get("price")
+        return render_template("index.html")
+    else:
+        return render_template("buy.html")
+
 
 
 @app.route("/history")
@@ -111,7 +118,15 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    if request.method == "POST":
+        quote_search = lookup(request.form.get("quote"))
+        quote_name = quote_search.get("name")
+        quote_symbol = quote_search.get("symbol")
+        quote_value = quote_search.get("price")
+        return render_template("quoted.html", quote_name=quote_name, quote_symbol=quote_symbol, quote_price=quote_value)
+    else:
+        return render_template("quote.html")
+
 
 
 @app.route("/register", methods=["GET", "POST"])
