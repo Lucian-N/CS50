@@ -52,7 +52,13 @@ def buy():
         quote_search = lookup(request.form.get("quote"))
         quote_name = quote_search.get("name")
         quote_symbol = quote_search.get("symbol")
-        quote_price = quote_search.get("price")
+        quote_share_price = float(quote_search.get("price"))
+        quote_shares = int(request.form.get("buy_quantity"))
+        quote_price = quote_share_price * quote_shares
+        quote_total_list=db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])[0]
+        quote_total= quote_total_list.get("cash") - quote_price
+        db.execute("INSERT INTO shares(symbol, name, shares, price, total, user_id) VALUES(:symbol, :name, :shares, :price, :total, :user_id)", symbol=quote_symbol, name=quote_name, \
+            shares=quote_shares, price=quote_price, total=quote_total, user_id=session["user_id"])
         return render_template("index.html")
     else:
         return render_template("buy.html")
